@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   type: string = "password";
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,17 +49,14 @@ export class LoginComponent implements OnInit {
     } else {
       this._authenticationService.login(this.f.userName.value, this.f.pass.value)
         .subscribe(data => {
-          console.log(data)
           if (data.statusCode === 200) {
-            console.log(data.data)
             if (data.data.isSuccess) {
-              console.log(data.data.data)
-              console.log(data.data.data.userId)
-              //this.router.navigate(['/dashboard?id=' + data.data.data.userId]);
               const url = this.router.serializeUrl(this.router.createUrlTree(['/dashboard'], { queryParams: { userId: data.data.data.userId } }));
-// open link in new tab
-            window.open(url, '_parent');
+              window.open(url, '_parent');
             }
+          }
+          if (data.statusCode === 404) {
+            alert(data.message)
           }
         } );;
     }

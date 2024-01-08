@@ -26,11 +26,8 @@ export class DashboardComponent implements OnInit {
   getBankAccounts() {
     this._bankService.getBankAccounts(this.userId)
         .subscribe(data => {
-          console.log(data)
           if (data.statusCode === 200) {
-            console.log(data.data)
             if (data.data.isSuccess) {
-              console.log(data.data.data)
               this.bankAccounts=data.data.data
              
             }
