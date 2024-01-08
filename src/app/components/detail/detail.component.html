@@ -1,0 +1,61 @@
+<div class="row p-3">
+    <div class="col-lg-5 ">
+        <div class="card ">
+            <div class="card-header bg-secondary text-white">Account Information</div>
+            <div class="card-body">
+                <div class="row p-0  pb-2" >
+                    <div class="col-4 p-0 "><label style="font-size:small">Name </label></div>
+                    <div class="col-8 p-0">
+                        {{accountName}}
+                    </div>
+                </div>
+                <div class="row p-0  pb-2">
+                    <div class="col-4 p-0 "><label style="font-size:small">Account number </label></div>
+                    <div class="col-8 p-0">
+                        {{accountNumber}}
+                    </div>
+                </div>
+                <div class="row p-0  pb-2">
+                    <div class="col-4 p-0 "><label style="font-size:small">Balance </label></div>
+                    <div class="col-8 p-0">
+                        {{balance | number:'1.2-2'}}
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="row p-3">
+    <div class="col-lg-12 ">
+        <div class="card ">
+            <div class="card-header bg-secondary text-white">Transactios</div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Date</th>
+                            <th>Details</th>
+                            <th>Deposit</th>
+                            <th>Withdraw</th>
+
+                        </tr>
+                    </thead>
+
+                        <tbody>
+                            <tr *ngFor="let tran of transactions">
+                                <td>{{tran.createdDate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                                <td>{{tran.details}}</td>
+                                <td>{{ tran.type ==='Deposit' ? convertDecimal(tran.amount ) :''}}</td>
+                                <td>{{tran.type === 'Withdraw' ? convertDecimal(tran.amount ) :''}}</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
